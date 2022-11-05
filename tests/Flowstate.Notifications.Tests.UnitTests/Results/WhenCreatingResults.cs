@@ -2,9 +2,9 @@ namespace Flowstate.Notifications.Tests.UnitTests.Results;
 
 public class WhenCreatingResults
 {
-    private readonly ErrorDetail _anErrorDetail = new("An Error");
+    private readonly ErrorDetail _someErrorDetail = new("An Error");
 
-    [Fact]
+    [Fact] 
     public void EmptyDetailsInternalInstanceIsSameAsEmptyArrayOfErrorDetail() =>
         Assert.Same(Array.Empty<ErrorDetail>(), Result.EmptyDetails);
 
@@ -39,13 +39,26 @@ public class WhenCreatingResults
     [Fact]
     public void FailureResultWithDetailsHasExpectedMemberValues()
     {
-        var result = Result.Failure(new[] { _anErrorDetail });
+        var result = Result.Failure(new[] { _someErrorDetail });
 
         Assert.False(result.Succeeded);
         Assert.NotEmpty(result.Details);
 
         var errorDetail = result.Details.Single();
-        Assert.Equal(_anErrorDetail, errorDetail);
+        Assert.Equal(_someErrorDetail, errorDetail);
+    }
+
+    [Fact]
+    public void FailureResultWithDetailsInitializedViaStringParamsArrayHasExpectedMemberValues()
+    {
+        var result = Result<int?>.Failure(_someErrorDetail.Description);
+
+        Assert.False(result.Succeeded);
+        Assert.Equal(default, result.Value);
+        Assert.NotEmpty(result.Details);
+
+        var errorDetail = result.Details.Single();
+        Assert.Equal(_someErrorDetail, errorDetail);
     }
 
     [Fact]
@@ -58,12 +71,12 @@ public class WhenCreatingResults
     [Fact]
     public void FailureResultWithStringDetailsHasExpectedMemberValues()
     {
-        var result = Result.Failure(_anErrorDetail.Description);
+        var result = Result.Failure(_someErrorDetail.Description);
 
         Assert.False(result.Succeeded);
         Assert.NotEmpty(result.Details);
 
         var errorDetail = result.Details.Single();
-        Assert.Equal(_anErrorDetail, errorDetail);
+        Assert.Equal(_someErrorDetail, errorDetail);
     }
 }
