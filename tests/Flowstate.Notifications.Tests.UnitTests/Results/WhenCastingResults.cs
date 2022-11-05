@@ -15,4 +15,26 @@ public class WhenCastingResults
         var result = Result.Failure();
         Assert.False(result);
     }
+
+    [Fact]
+    public void FailureWithValueCastProducesExpectedValue()
+    {
+        var originalResult = Result.Failure("err1", "err2");
+        var newResult = originalResult.CastFailure<long?>();
+
+        Assert.False(newResult.Succeeded);
+        Assert.Equal(originalResult.Details.Count, newResult.Details.Count);
+
+        Assert.All(
+            originalResult.Details.Zip(newResult.Details),
+            originalNewPair => Assert.Equal(originalNewPair.First, originalNewPair.Second));
+    }
+
+    [Fact]
+    public void TryingToForceFailureCastOnSuccessResultThrows()
+    {
+        var originalResult = Result.Success();
+        var exception = Assert.Throws<Exception>(() => originalResult.CastFailure<long?>());
+        Assert.Contains(Result.CannotCastSucceededResultAsFailure, exception.ToString());
+    }
 }

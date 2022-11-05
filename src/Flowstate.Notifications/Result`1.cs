@@ -35,8 +35,21 @@ namespace Flowstate.Notifications
             details = Details;
         }
 
+        public Result<TTarget> CastFailure<TTarget>() =>
+            _succeeded
+                ? throw new Exception(CannotCastSucceededResultAsFailure)
+                : Result<TTarget>.Failure(Details);
+
+
+        public Result CastFailure() =>
+            _succeeded
+                ? throw new Exception(CannotCastSucceededResultAsFailure)
+                : Result.Failure(Details);
+
+
         public static implicit operator bool(Result<T> @this) => @this.Succeeded;
 
         internal static readonly string DetailsContainsUninitializedItems = "'details' contains uninitilized items.";
+        internal static readonly string CannotCastSucceededResultAsFailure = "Cannot cast succeeeded result as failure.";
     }
 }
