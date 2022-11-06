@@ -6,45 +6,45 @@ namespace Flowstate.Notifications.Tests.References
 {
     public class Result<T>
     {
-        internal static readonly IReadOnlyList<ErrorDetail> EmptyDetails = Array.Empty<ErrorDetail>();
+        internal static readonly IReadOnlyList<FailureDetail> EmptyFailureDetails = Array.Empty<FailureDetail>();
 
         private bool _succeeded;
         private T _value;
-        private IReadOnlyList<ErrorDetail> _details;
+        private IReadOnlyList<FailureDetail> _failureDetails;
 
         public bool Succeeded => _succeeded;
         public T Value => _value;
-        public IReadOnlyList<ErrorDetail> Details => _details ?? EmptyDetails;
+        public IReadOnlyList<FailureDetail> FailureDetails => _failureDetails ?? EmptyFailureDetails;
 
         public static Result<T> Success(T value) => new Result<T> { _succeeded = true, _value = value };
 
-        public static Result<T> Failure(IReadOnlyList<ErrorDetail> details = null) =>
+        public static Result<T> Failure(IReadOnlyList<FailureDetail> details = null) =>
             details?.Any(x => x.Equals(default)) ?? false
                 ? throw new ArgumentException(ResultsErrorMessages.DetailsContainsUninitializedItems, nameof(details))
-                : new Result<T> { _succeeded = false, _details = details ?? EmptyDetails };
+                : new Result<T> { _succeeded = false, _failureDetails = details ?? EmptyFailureDetails };
 
 
         public static Result<T> Failure(params string[] details) =>
-            Failure(details?.Select(x => new ErrorDetail(x)).ToArray());
+            Failure(details?.Select(x => new FailureDetail(x)).ToArray());
 
 
-        public void Deconstruct(out bool succeeded, out T value, out IReadOnlyList<ErrorDetail> details)
+        public void Deconstruct(out bool succeeded, out T value, out IReadOnlyList<FailureDetail> failureDetails)
         {
             succeeded = Succeeded;
             value = Value;
-            details = Details;
+            failureDetails = FailureDetails;
         }
 
         public Result<TTarget> CastFailure<TTarget>() =>
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSucceededResultAsFailure)
-                : Result<TTarget>.Failure(Details);
+                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
+                : Result<TTarget>.Failure(FailureDetails);
 
 
         public Result CastFailure() =>
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSucceededResultAsFailure)
-                : Result.Failure(Details);
+                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
+                : Result.Failure(FailureDetails);
 
 
         public static implicit operator bool(Result<T> @this) => @this.Succeeded;
