@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Flowstate.Notifications\Flowstate.Notifications.csproj" />
-    <ProjectReference Include="..\Flowstate.Notifications.Tests.References\Flowstate.Notifications.Tests.References.csproj" />
   </ItemGroup>
 
 </Project>

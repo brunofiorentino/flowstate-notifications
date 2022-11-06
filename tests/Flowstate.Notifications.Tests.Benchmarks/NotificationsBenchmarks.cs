@@ -6,56 +6,33 @@ namespace Flowstate.Notifications.Tests.Benchmarks;
 public class NotificationsBenchmarks
 {
     [Benchmark]
-    public Result ValueNotificationOfSuccess() =>
+    public Result<int> Valued_SuccessResult() =>
+        Result<int>.Success(123);
+
+    [Benchmark]
+    public Result Valueless_SuccessResult() =>
         Result.Success();
 
     [Benchmark]
-    public Result ValueNotificationOfFailureWithoutDetails() =>
+    public Result Valueless_FailureResult_without_details() =>
         Result.Failure();
 
     [Benchmark]
-    public Result ValueNotificationOfFailureWithOneDetail() =>
+    public Result Valueless_FailureResult_with_one_detail() =>
         Result.Failure("a error via value result");
 
     [Benchmark]
-    public Result ValueNotificationOfFailureWithManyDetails() => Result.Failure
+    public Result Valueless_FailureResult_with_many_details() => Result.Failure
     (
-        "a error via value result 001",
-        "a error via value result 002",
-        "a error via value result 003",
-        "a error via value result 004",
-        "a error via value result 005",
-        "a error via value result 006",
-        "a error via value result 007",
-        "a error via value result 008",
-        "a error via value result 009",
-        "a error via value result 010"
-    );
-
-    [Benchmark]
-    public References.Result ReferenceNotificationOfSuccessWithoutDetails() =>
-        References.Result.Success();
-
-    [Benchmark]
-    public References.Result ReferenceNotificationOfFailureWithoutDetails() =>
-    References.Result.Failure();
-
-    [Benchmark]
-    public References.Result ReferenceNotificationOfFailureWithOneDetail() =>
-        References.Result.Failure("a error via ref result");
-
-    [Benchmark]
-    public References.Result ReferenceNotificationOfFailureWithManyDetails() => References.Result.Failure
-    (
-        "a error via reference result 001",
-        "a error via reference result 002",
-        "a error via reference result 003",
-        "a error via reference result 004",
-        "a error via reference result 005",
-        "a error via reference result 006",
-        "a error via reference result 007",
-        "a error via reference result 008",
-        "a error via reference result 009",
-        "a error via reference result 010"
+        "a failure description 001",
+        "a failure description 002",
+        "a failure description 003",
+        "a failure description 004",
+        "a failure description 005",
+        "a failure description 006",
+        "a failure description 007",
+        "a failure description 008",
+        "a failure description 009",
+        "a failure description 010"
     );
 }
