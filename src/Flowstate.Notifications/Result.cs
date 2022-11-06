@@ -21,10 +21,8 @@ namespace Flowstate.Notifications
                 ? throw new ArgumentException(ResultsErrorMessages.DetailsContainsUninitializedItems, nameof(details))
                 : new Result { _succeeded = false, _failureDetails = details ?? EmptyFailureDetails };
 
-
-        public static Result Failure(params string[] details) =>
-            Failure(details?.Select(x => new FailureDetail(x)).ToArray());
-
+        public static Result Failure(params FailureDetail[] details) =>
+            Failure((IReadOnlyList<FailureDetail>)details);
 
         public void Deconstruct(out bool succeeded, out IReadOnlyList<FailureDetail> failureDetails)
         {
@@ -32,7 +30,7 @@ namespace Flowstate.Notifications
             failureDetails = FailureDetails;
         }
 
-        public Result<TTarget> AsValuedFailure<TTarget>() => 
+        public Result<TTarget> Cast<TTarget>() => 
             _succeeded
                 ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult)
                 : Result<TTarget>.Failure(FailureDetails);

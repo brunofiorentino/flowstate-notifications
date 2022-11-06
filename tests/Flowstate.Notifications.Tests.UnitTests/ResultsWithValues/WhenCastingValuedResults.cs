@@ -22,7 +22,7 @@ public class WhenCastingValuedResults
     public void FailureResult_to_other_valued_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
-        var newResult = originalResult.AsValuedFailure<long?>();
+        var newResult = originalResult.Cast<long?>();
 
         Assert.False(newResult.Succeeded);
         Assert.Equal(originalResult.FailureDetails.Count, newResult.FailureDetails.Count);
@@ -36,7 +36,7 @@ public class WhenCastingValuedResults
     public void SuccessResult_to_valueless_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Success(_someValue);
-        var newResult = originalResult.AsValueless();
+        var newResult = originalResult.Cast();
 
         Assert.True(newResult.Succeeded);
         Assert.Empty(newResult.FailureDetails);
@@ -46,7 +46,7 @@ public class WhenCastingValuedResults
     public void FailureResult_to_valueless_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
-        var newResult = originalResult.AsValueless();
+        var newResult = originalResult.Cast();
 
         Assert.False(newResult.Succeeded);
         Assert.Equal(originalResult.FailureDetails.Count, newResult.FailureDetails.Count);
@@ -60,7 +60,7 @@ public class WhenCastingValuedResults
     public void Trying_to_force_SuccessResult_to_FailureResult_cast_throws()
     {
         var originalResult = Result<int?>.Success(123);
-        var exception = Assert.Throws<Exception>(() => originalResult.AsValuedFailure<long?>());
+        var exception = Assert.Throws<Exception>(() => originalResult.Cast<long?>());
         Assert.Contains(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult, exception.ToString());
     }
 }

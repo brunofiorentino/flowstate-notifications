@@ -32,6 +32,8 @@ namespace Flowstate.Notifications
         public override bool Equals(object obj) =>
             obj is FailureDetail other && Equals(other);
 
+        public static implicit operator FailureDetail(string @this) => new FailureDetail(@this);
+        public static implicit operator FailureDetail((string, string) @this) => new FailureDetail(@this.Item1, @this.Item2);
 
         internal static readonly string DescriptionCannotBeEmptyOrWhiteSpace =
             $"'description' cannot be empty or white space.";
