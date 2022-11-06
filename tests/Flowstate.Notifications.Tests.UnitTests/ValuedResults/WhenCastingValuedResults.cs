@@ -1,4 +1,4 @@
-namespace Flowstate.Notifications.Tests.UnitTests.ResultsWithValues;
+namespace Flowstate.Notifications.Tests.UnitTests.ValuedResults;
 
 public class WhenCastingValuedResults
 {

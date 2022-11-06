@@ -1,10 +1,10 @@
-namespace Flowstate.Notifications.Tests.UnitTests.Results;
+namespace Flowstate.Notifications.Tests.UnitTests.ValuelessResults;
 
-public class WhenCreatingResults
+public class WhenCreatingValuelessResults
 {
     private readonly FailureDetail _someFailureDetail = new("An Error");
 
-    [Fact] 
+    [Fact]
     public void EmptyFailureDetails_internal_instance_is_same_as_platform_ArrayEmpty() =>
         Assert.Same(Array.Empty<FailureDetail>(), Result.EmptyFailureDetails);
 

@@ -1,6 +1,6 @@
-namespace Flowstate.Notifications.Tests.UnitTests.Results;
+namespace Flowstate.Notifications.Tests.UnitTests.ValuelessResults;
 
-public class WhenCastingResults
+public class WhenCastingValuelessResults
 {
     [Fact]
     public void SuccessResult_to_boolean_implicit_cast_produces_expected_value()
