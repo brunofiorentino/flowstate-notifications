@@ -41,9 +41,9 @@ namespace Flowstate.Notifications
                 : Result<TTarget>.Failure(FailureDetails);
 
 
-        public Result AsValuelessFailure() =>
+        public Result AsValueless() =>
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult)
+                ? Result.Success()
                 : Result.Failure(FailureDetails);
 
 

@@ -1,6 +1,6 @@
 namespace Flowstate.Notifications.Tests.UnitTests.ResultsWithValues;
 
-public class WhenCreatingResultsWithValues
+public class WhenCreatingValuedResults
 {
     private readonly FailureDetail _someFailureDetail = new("An Error");
     private readonly int? _someValue = 123;
