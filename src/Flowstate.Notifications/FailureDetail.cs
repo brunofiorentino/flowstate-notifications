@@ -8,14 +8,14 @@ namespace Flowstate.Notifications
         private readonly string _tags;
         private readonly int _hashCode;
 
-        public FailureDetail(string description, string tag = null)
+        public FailureDetail(string description, string tags = null)
         {
             if (description == null) throw new ArgumentNullException(nameof(description));
             if (string.IsNullOrWhiteSpace(description))
                 throw new ArgumentException(DescriptionCannotBeEmptyOrWhiteSpace, nameof(description));
 
             _description = description;
-            _tags = tag;
+            _tags = tags;
             _hashCode = (_description, _tags).GetHashCode();
         }
 
