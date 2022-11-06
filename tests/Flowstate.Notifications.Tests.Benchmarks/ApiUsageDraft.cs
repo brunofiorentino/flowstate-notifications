@@ -60,7 +60,7 @@
             {
                 // Note the convenience implicit cast from (string, string) value tuple to complete FailureDetail
 
-                details.Add(("'param2' should this...", "some_tag"));            
+                details.Add(("'param2' should this...", "some_tag"));
                 details.Add(("'param2' should that...", "some_tag"));
             }
 
@@ -99,18 +99,26 @@
         Result<double> OperationC(string param)
         {
             var op1Result = OperationA(param);
-            
+
             if (!op1Result) // Note the convenience boolean implicit cast
-                return op1Result.Cast<double>(); 
+                return op1Result.Cast<double>();
 
             var op2Result = OperationB(param);
-            
+
             if (!op2Result.Succeeded) // ... without implicit cast
                 return op2Result.Cast<double>();
 
             var op3Calculation = (double)op1Result.Value / op2Result.Value;
 
             return Result<double>.Success(op3Calculation);
+        }
+
+        Result<double> OperationD(string param)
+        {
+            var (succeeded, importantCalculation, _) = OperationC(param); // Destructuring ignoring (_) failure details.
+            if (!succeeded) return Result<double>.Failure("Abstract reason");
+            var derivedCalculation = importantCalculation * 2;
+            return Result<double>.Success(derivedCalculation);
         }
     }
 }

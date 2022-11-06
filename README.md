@@ -37,7 +37,7 @@ Result Operation3(string param)
     if (param.StartsWith("x") && param.EndsWith("z"))
         return Result.Failure(
             "'param' shouldn't ... x ",
-            "'param' should'nt ... z");
+            "'param' shouldn't ... z");
 
     return Result.Success();
 }
@@ -129,3 +129,13 @@ Result<double> OperationC(string param)
 }
 ```
 
+### Result and Result<T> structs support deconstruction
+``` 
+Result<decimal> OperationD(string param)
+{
+    var (succeeded, importantCalculation, _) = OperationC(param); // deconstruction ignoring (_) failure details.
+    if (!succeeded) return Result<decimal>.Failure("Abstract reason");
+    var derivedCalculation = importantCalculation * 2;
+    return Result<decimal>.Success(derivedCalculation);
+}
+```
