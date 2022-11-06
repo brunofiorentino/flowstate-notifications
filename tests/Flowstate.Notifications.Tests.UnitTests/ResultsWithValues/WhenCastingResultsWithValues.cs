@@ -5,21 +5,21 @@ public class WhenCastingResultsWithValues
     private readonly int? _someValue = 123;
 
     [Fact]
-    public void SuccessImplicitBooleanCastProducesExpectedValue()
+    public void Success_implicit_boolean_cast_produces_expected_value()
     {
         var result = Result<int?>.Success(_someValue);
         Assert.True(result);
     }
 
     [Fact]
-    public void FailureImplicitBooleanCastProducesExpectedValue()
+    public void Failure_implicit_boolean_cast_produces_expected_value()
     {
         var result = Result<int?>.Failure();
         Assert.False(result);
     }
 
     [Fact]
-    public void FailureWithValueCastProducesExpectedValue()
+    public void Failure_with_value_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
         var newResult = originalResult.CastFailure<long?>();
@@ -33,7 +33,7 @@ public class WhenCastingResultsWithValues
     }
 
     [Fact]
-    public void FailureWithoutValueCastProducesExpectedValue()
+    public void Failure_without_value_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
         var newResult = originalResult.CastFailure();
@@ -47,7 +47,7 @@ public class WhenCastingResultsWithValues
     }
 
     [Fact]
-    public void TryingToForceFailureCastOnSuccessResultThrows()
+    public void Trying_to_force_failure_cast_on_success_result_throws()
     {
         var originalResult = Result<int?>.Success(123);
         var exception = Assert.Throws<Exception>(() => originalResult.CastFailure<long?>());

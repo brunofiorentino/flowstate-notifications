@@ -3,7 +3,7 @@
 public class WhenComparingErrorDetails
 {
     [Fact]
-    public void HashCodeExpectationsAreMet()
+    public void HashCode_expectations_are_met()
     {
         var a1Tuple = ("ad", "at");
         var a1 = new ErrorDetail(a1Tuple.Item1, a1Tuple.Item2);
@@ -28,7 +28,7 @@ public class WhenComparingErrorDetails
     }
 
     [Fact]
-    public void EqualityComparisonsWithAllMembersSetArePrecise()
+    public void Equality_comparisons_with_all_members_set_are_precise()
     {
         var a = new ErrorDetail("ad", "at");
         var b = new ErrorDetail("bd", "bt");
@@ -38,7 +38,7 @@ public class WhenComparingErrorDetails
     }
 
     [Fact]
-    public void EqualityComparisonsWithTagMemberUnsetArePrecise()
+    public void Equality_comparisons_with_tag_member_unset_are_precise()
     {
         var a = new ErrorDetail("ad");
         var b = new ErrorDetail("bd");
@@ -48,7 +48,7 @@ public class WhenComparingErrorDetails
     }
 
     [Fact]
-    public void EqualityComparisonsForUninitilizedStructsArePrecise()
+    public void Equality_comparisons_for_unintialized_structs_are_precise()
     {
         // Depends on IEquatable implementation otherwise boxing will break uninitilized/default comparisons
 
