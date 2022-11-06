@@ -69,7 +69,7 @@ Result Operation5(string param)
 }
 ```
 
-### Acumulating failure details created in multiple ways
+### Accumulating failure details created in multiple ways
 ``` 
 Result Operation6(string param1, string param2, string param3)
 {
