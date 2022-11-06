@@ -38,7 +38,7 @@ public class WhenComparingFailureDetails
     }
 
     [Fact]
-    public void Compares_value_object_equality_considering_unset_tag_member()
+    public void Compares_value_object_equality_considering_unset_tags_member()
     {
         var a = new FailureDetail("ad");
         var b = new FailureDetail("bd");

@@ -10,23 +10,23 @@ public class WhenCreatingFailureDetails
     {
         FailureDetail failureDetail = default;
         Assert.Null(failureDetail.Description);
-        Assert.NotNull(failureDetail.Tag);
-        Assert.Empty(failureDetail.Tag);
+        Assert.NotNull(failureDetail.Tags);
+        Assert.Empty(failureDetail.Tags);
     }
 
     [Fact]
-    public void FailureDetail_with_tag_unset_has_expected_member_values()
+    public void FailureDetail_with_tags_unset_has_expected_member_values()
     {
         var failureDetail = new FailureDetail(Description);
         Assert.Equal(Description, failureDetail.Description);
-        Assert.Empty(failureDetail.Tag);
+        Assert.Empty(failureDetail.Tags);
     }
 
     [Fact]
-    public void FailureDetail_with_tag_unset_explicitly_has_expected_member_values()
+    public void FailureDetail_with_tags_unset_explicitly_has_expected_member_values()
     {
         var failureDetail = new FailureDetail(Description, null!);
-        Assert.Empty(failureDetail.Tag);
+        Assert.Empty(failureDetail.Tags);
     }
 
     [Fact]
@@ -41,10 +41,10 @@ public class WhenCreatingFailureDetails
 
 
     [Fact]
-    public void FailureDetail_with_description_and_tag_set_has_expected_member_values()
+    public void FailureDetail_with_description_and_tags_set_has_expected_member_values()
     {
         var failureDetail = new FailureDetail(Description, Tag);
         Assert.Equal(Description, failureDetail.Description);
-        Assert.Equal(Tag, failureDetail.Tag);
+        Assert.Equal(Tag, failureDetail.Tags);
     }
 }
