@@ -24,8 +24,8 @@ namespace Flowstate.Notifications
                 : new Result<T> { _succeeded = false, _failureDetails = details ?? EmptyFailureDetails };
 
 
-        public static Result<T> Failure(params string[] details) =>
-            Failure(details?.Select(x => new FailureDetail(x)).ToArray());
+        public static Result<T> Failure(params FailureDetail[] details) =>
+            Failure((IReadOnlyList<FailureDetail>)details);
 
 
         public void Deconstruct(out bool succeeded, out T value, out IReadOnlyList<FailureDetail> failureDetails)
