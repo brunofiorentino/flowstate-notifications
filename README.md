@@ -6,6 +6,8 @@ Flowstate.Notitifications is a minimal C# Notification library based on C# struc
 
 "Notification" refers to the homonymous design pattern, used to avoid the unintelligible and runtime costly exceptions throwing for mere input and business rule validation. However, this is not a substitute for structured error handling, as exceptions should continue to be used for guard clauses and the like.
 
+\[0]\ - [Notification Design Pattern](https://martinfowler.com/eaaDev/Notification.html)
+
 ## Usage
 
 ### Simple early return based validation
@@ -129,7 +131,3 @@ Result<double> OperationC(string param)
 }
 ```
 
-
-## References
-
-- [Notification Design Pattern](https://martinfowler.com/eaaDev/Notification.html)
