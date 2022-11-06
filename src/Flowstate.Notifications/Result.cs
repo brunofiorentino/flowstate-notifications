@@ -6,36 +6,36 @@ namespace Flowstate.Notifications
 {
     public struct Result
     {
-        internal static readonly IReadOnlyList<ErrorDetail> EmptyDetails = Array.Empty<ErrorDetail>();
+        internal static readonly IReadOnlyList<FailureDetail> EmptyFailureDetails = Array.Empty<FailureDetail>();
 
         private bool _succeeded;
-        private IReadOnlyList<ErrorDetail> _details;
+        private IReadOnlyList<FailureDetail> _failureDetails;
 
         public bool Succeeded => _succeeded;
-        public IReadOnlyList<ErrorDetail> Details => _details ?? EmptyDetails;
+        public IReadOnlyList<FailureDetail> FailureDetails => _failureDetails ?? EmptyFailureDetails;
 
         public static Result Success() => new Result { _succeeded = true };
 
-        public static Result Failure(IReadOnlyList<ErrorDetail> details = null) =>
+        public static Result Failure(IReadOnlyList<FailureDetail> details = null) =>
             (details?.Any(x => x.Equals(default)) ?? false)
                 ? throw new ArgumentException(ResultsErrorMessages.DetailsContainsUninitializedItems, nameof(details))
-                : new Result { _succeeded = false, _details = details ?? EmptyDetails };
+                : new Result { _succeeded = false, _failureDetails = details ?? EmptyFailureDetails };
 
 
         public static Result Failure(params string[] details) =>
-            Failure(details?.Select(x => new ErrorDetail(x)).ToArray());
+            Failure(details?.Select(x => new FailureDetail(x)).ToArray());
 
 
-        public void Deconstruct(out bool succeeded, out IReadOnlyList<ErrorDetail> details)
+        public void Deconstruct(out bool succeeded, out IReadOnlyList<FailureDetail> failureDetails)
         {
             succeeded = Succeeded;
-            details = Details;
+            failureDetails = FailureDetails;
         }
 
         public Result<TTarget> CastFailure<TTarget>() => 
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSucceededResultAsFailure)
-                : Result<TTarget>.Failure(Details);
+                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
+                : Result<TTarget>.Failure(FailureDetails);
 
 
         public static implicit operator bool(Result @this) => @this.Succeeded;
