@@ -1,10 +1,10 @@
 # Flowstate.Notifications
 
-Flowstate.Notitifications is a minimal C# Notification library based on C# structs (reduced allocations), a few convenience factory methods and implicit casts.
+Flowstate.Notitifications is a minimal C# Notification library based on C# structs (reduced allocations), a few factory methods and implicit casts to specify failure details.
 
 ## Context
 
-"Notification" refers to the homonymous design pattern, used to avoid the unintelligible and costly throwing of exceptions for mere input validation and business rules. However, this is not a substitute for structured error handling, as exceptions should continue to be used for guard clauses and the like.
+"Notification" refers to the homonymous design pattern, used to avoid the unintelligible and runtime costly exceptions throwing for mere input and business rule validation. However, this is not a substitute for structured error handling, as exceptions should continue to be used for guard clauses and the like.
 
 ## Usage
 
@@ -89,12 +89,12 @@ Result Operation6(string param1, string param2, string param3)
     var details = new List<FailureDetail>();
 
     if (string.IsNullOrEmpty(param1))
-        details.Add("'param1' must..."); // Note the convenience implicit cast from string to description only (without tag) FailureDetail
+        details.Add("'param1' must..."); // Implicit cast from string to description only FailureDetail
 
 
     if (string.IsNullOrEmpty(param2))
     {
-        // Note the convenience implicit cast from (string, string) value tuple to complete FailureDetail
+        // Implicit cast from (string, string) value tuple to complete FailureDetail
 
         details.Add(("'param2' should this...", "some_tag"));            
         details.Add(("'param2' should that...", "some_tag"));
@@ -119,7 +119,7 @@ Result<int> Operation7(string param)
 }
 ```
 
-### Combining valued, notification based operations
+### Handling multiple notification based operations
 ``` 
 Result<int> OperationA(string param) { /*...*/}
 Result<int> OperationB(string param) { /*...*/}
@@ -145,3 +145,4 @@ Result<double> OperationC(string param)
 
 ## References
 
+- [Notification Design Pattern](https://martinfowler.com/eaaDev/Notification.html)
