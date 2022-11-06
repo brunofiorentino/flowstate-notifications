@@ -22,7 +22,7 @@ public class WhenCastingResultsWithValues
     public void FailureResult_with_value_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
-        var newResult = originalResult.CastFailure<long?>();
+        var newResult = originalResult.AsValuedFailure<long?>();
 
         Assert.False(newResult.Succeeded);
         Assert.Equal(originalResult.FailureDetails.Count, newResult.FailureDetails.Count);
@@ -36,7 +36,7 @@ public class WhenCastingResultsWithValues
     public void FailureResult_without_value_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
-        var newResult = originalResult.CastFailure();
+        var newResult = originalResult.AsValuelessFailure();
 
         Assert.False(newResult.Succeeded);
         Assert.Equal(originalResult.FailureDetails.Count, newResult.FailureDetails.Count);
@@ -50,7 +50,7 @@ public class WhenCastingResultsWithValues
     public void Trying_to_force_FailureResult_cast_on_SuccessResult_throws()
     {
         var originalResult = Result<int?>.Success(123);
-        var exception = Assert.Throws<Exception>(() => originalResult.CastFailure<long?>());
-        Assert.Contains(ResultsErrorMessages.CannotCastSuccessResultAsFailure, exception.ToString());
+        var exception = Assert.Throws<Exception>(() => originalResult.AsValuedFailure<long?>());
+        Assert.Contains(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult, exception.ToString());
     }
 }

@@ -20,7 +20,7 @@ public class WhenCastingResults
     public void FailureResult_with_value_cast_produces_expected_value()
     {
         var originalResult = Result.Failure("err1", "err2");
-        var newResult = originalResult.CastFailure<long?>();
+        var newResult = originalResult.AsValuedFailure<long?>();
 
         Assert.False(newResult.Succeeded);
         Assert.Equal(originalResult.FailureDetails.Count, newResult.FailureDetails.Count);
@@ -34,7 +34,7 @@ public class WhenCastingResults
     public void Trying_to_force_FailureResult_cast_on_SuccessResult_throws()
     {
         var originalResult = Result.Success();
-        var exception = Assert.Throws<Exception>(() => originalResult.CastFailure<long?>());
-        Assert.Contains(ResultsErrorMessages.CannotCastSuccessResultAsFailure, exception.ToString());
+        var exception = Assert.Throws<Exception>(() => originalResult.AsValuedFailure<long?>());
+        Assert.Contains(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult, exception.ToString());
     }
 }

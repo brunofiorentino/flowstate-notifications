@@ -35,15 +35,15 @@ namespace Flowstate.Notifications
             failureDetails = FailureDetails;
         }
 
-        public Result<TTarget> CastFailure<TTarget>() =>
+        public Result<TTarget> AsValuedFailure<TTarget>() =>
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
+                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult)
                 : Result<TTarget>.Failure(FailureDetails);
 
 
-        public Result CastFailure() =>
+        public Result AsValuelessFailure() =>
             _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
+                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailureResult)
                 : Result.Failure(FailureDetails);
 
 

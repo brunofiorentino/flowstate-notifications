@@ -41,12 +41,6 @@ namespace Flowstate.Notifications.Tests.References
                 : Result<TTarget>.Failure(FailureDetails);
 
 
-        public Result CastFailure() =>
-            _succeeded
-                ? throw new Exception(ResultsErrorMessages.CannotCastSuccessResultAsFailure)
-                : Result.Failure(FailureDetails);
-
-
         public static implicit operator bool(Result<T> @this) => @this.Succeeded;
     }
 }
