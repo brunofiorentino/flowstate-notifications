@@ -65,7 +65,7 @@ public class WhenCreatingResults
     public void FailureResultWithUninitializedDetailsThrows()
     {
         var exception = Assert.Throws<ArgumentException>(() => Result.Failure(new ErrorDetail[] { default }));
-        Assert.Contains(Result.DetailsContainsUninitializedItems, exception.ToString());
+        Assert.Contains(ResultsErrorMessages.DetailsContainsUninitializedItems, exception.ToString());
     }
 
     [Fact]

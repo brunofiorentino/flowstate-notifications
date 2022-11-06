@@ -51,6 +51,6 @@ public class WhenCastingResultsWithValues
     {
         var originalResult = Result<int?>.Success(123);
         var exception = Assert.Throws<Exception>(() => originalResult.CastFailure<long?>());
-        Assert.Contains(Result<int?>.CannotCastSucceededResultAsFailure, exception.ToString());
+        Assert.Contains(ResultsErrorMessages.CannotCastSucceededResultAsFailure, exception.ToString());
     }
 }

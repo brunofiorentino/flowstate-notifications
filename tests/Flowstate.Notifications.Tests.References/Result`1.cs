@@ -20,7 +20,7 @@ namespace Flowstate.Notifications.Tests.References
 
         public static Result<T> Failure(IReadOnlyList<ErrorDetail> details = null) =>
             details?.Any(x => x.Equals(default)) ?? false
-                ? throw new ArgumentException(DetailsContainsUninitializedItems, nameof(details))
+                ? throw new ArgumentException(ResultsErrorMessages.DetailsContainsUninitializedItems, nameof(details))
                 : new Result<T> { _succeeded = false, _details = details ?? EmptyDetails };
 
 
@@ -35,8 +35,18 @@ namespace Flowstate.Notifications.Tests.References
             details = Details;
         }
 
-        public static implicit operator bool(Result<T> @this) => @this.Succeeded;
+        public Result<TTarget> CastFailure<TTarget>() =>
+            _succeeded
+                ? throw new Exception(ResultsErrorMessages.CannotCastSucceededResultAsFailure)
+                : Result<TTarget>.Failure(Details);
 
-        internal static readonly string DetailsContainsUninitializedItems = "'details' contains uninitilized items.";
+
+        public Result CastFailure() =>
+            _succeeded
+                ? throw new Exception(ResultsErrorMessages.CannotCastSucceededResultAsFailure)
+                : Result.Failure(Details);
+
+
+        public static implicit operator bool(Result<T> @this) => @this.Succeeded;
     }
 }

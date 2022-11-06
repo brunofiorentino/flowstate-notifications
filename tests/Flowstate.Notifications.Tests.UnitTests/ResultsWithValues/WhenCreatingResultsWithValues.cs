@@ -93,6 +93,6 @@ public class WhenCreatingResultsWithValues
     public void FailureResultWithUninitializedDetailsThrows()
     {
         var exception = Assert.Throws<ArgumentException>(() => Result<int?>.Failure(new ErrorDetail[] { default }));
-        Assert.Contains(Result<int?>.DetailsContainsUninitializedItems, exception.ToString());
+        Assert.Contains(ResultsErrorMessages.DetailsContainsUninitializedItems, exception.ToString());
     }
 }
