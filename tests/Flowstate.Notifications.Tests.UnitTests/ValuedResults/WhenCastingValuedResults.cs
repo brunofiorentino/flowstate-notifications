@@ -5,21 +5,21 @@ public class WhenCastingValuedResults
     private readonly int? _someValue = 123;
 
     [Fact]
-    public void Success_result_to_boolean_implicit_cast_produces_expected_value()
+    public void Success_Result_to_boolean_implicit_cast_produces_expected_value()
     {
         var result = Result<int?>.Success(_someValue);
         Assert.True(result);
     }
 
     [Fact]
-    public void Failure_result_to_boolean_implicit_cast_produces_expected_value()
+    public void Failure_Result_to_boolean_implicit_cast_produces_expected_value()
     {
         var result = Result<int?>.Failure();
         Assert.False(result);
     }
 
     [Fact]
-    public void Failure_result_to_other_valued_result_cast_produces_expected_value()
+    public void Failure_Result_to_other_valued_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
         var newResult = originalResult.Cast<long?>();
@@ -33,7 +33,7 @@ public class WhenCastingValuedResults
     }
 
     [Fact]
-    public void Success_result_to_valueless_result_cast_produces_expected_value()
+    public void Success_Result_to_valueless_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Success(_someValue);
         var newResult = originalResult.Cast();
@@ -43,7 +43,7 @@ public class WhenCastingValuedResults
     }
 
     [Fact]
-    public void Failure_result_to_valueless_result_cast_produces_expected_value()
+    public void Failure_Result_to_valueless_result_cast_produces_expected_value()
     {
         var originalResult = Result<int?>.Failure("err1", "err2");
         var newResult = originalResult.Cast();
@@ -57,7 +57,7 @@ public class WhenCastingValuedResults
     }
 
     [Fact]
-    public void Trying_to_force_Success_result_to_Failure_result_cast_throws()
+    public void Trying_to_force_Success_Result_to_Failure_Result_cast_throws()
     {
         var originalResult = Result<int?>.Success(123);
         var exception = Assert.Throws<Exception>(() => originalResult.Cast<long?>());

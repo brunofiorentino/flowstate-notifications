@@ -6,33 +6,33 @@ namespace Flowstate.Notifications.Tests.Benchmarks;
 public class NotificationsBenchmarks
 {
     [Benchmark]
-    public Result<int> Valued_SuccessResult() =>
+    public Result<int> Valued_success_Result() =>
         Result<int>.Success(123);
 
     [Benchmark]
-    public Result Valueless_SuccessResult() =>
+    public Result Valueless_success_Result() =>
         Result.Success();
 
     [Benchmark]
-    public Result Valueless_FailureResult_without_details() =>
+    public Result Valueless_failure_Result_without_details() =>
         Result.Failure();
 
     [Benchmark]
-    public Result Valueless_FailureResult_with_one_detail() =>
+    public Result Valueless_failure_Result_with_one_detail() =>
         Result.Failure("a error via value result");
 
     [Benchmark]
-    public Result Valueless_FailureResult_with_many_details() => Result.Failure
+    public Result Valueless_failure_Result_with_ten_details() => Result.Failure
     (
-        "a failure description 001",
-        "a failure description 002",
-        "a failure description 003",
-        "a failure description 004",
-        "a failure description 005",
-        "a failure description 006",
-        "a failure description 007",
-        "a failure description 008",
-        "a failure description 009",
-        "a failure description 010"
+        "failure description 001",
+        "failure description 002",
+        "failure description 003",
+        "failure description 004",
+        "failure description 005",
+        "failure description 006",
+        "failure description 007",
+        "failure description 008",
+        "failure description 009",
+        "failure description 010"
     );
 }

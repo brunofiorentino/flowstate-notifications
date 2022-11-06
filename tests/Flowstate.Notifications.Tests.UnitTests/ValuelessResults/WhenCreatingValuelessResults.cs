@@ -5,7 +5,7 @@ public class WhenCreatingValuelessResults
     private readonly FailureDetail _someFailureDetail = new("An Error");
 
     [Fact]
-    public void EmptyFailureDetails_internal_instance_is_same_as_platform_ArrayEmpty() =>
+    public void EmptyFailureDetails_internal_instance_is_same_as_platform_Array_Empty() =>
         Assert.Same(Array.Empty<FailureDetail>(), Result.EmptyFailureDetails);
 
     [Fact]
@@ -18,7 +18,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Success_result_has_expected_member_values()
+    public void Success_Result_has_expected_member_values()
     {
         var result = Result.Success();
 
@@ -37,7 +37,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_result_with_details_has_expected_member_values()
+    public void Failure_Result_with_details_has_expected_member_values()
     {
         var result = Result.Failure(new[] { _someFailureDetail });
 
@@ -49,7 +49,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_result_with_details_initialized_via_string_params_array_has_expected_member_values()
+    public void Failure_Result_with_details_initialized_via_string_params_array_has_expected_member_values()
     {
         const string error1 = "err1";
         const string error2 = "err2";
@@ -63,14 +63,14 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_result_with_uninitialized_details_throws()
+    public void Failure_Result_with_uninitialized_details_throws()
     {
         var exception = Assert.Throws<ArgumentException>(() => Result.Failure(new FailureDetail[] { default }));
         Assert.Contains(ResultsErrorMessages.DetailsContainsUninitializedItems, exception.ToString());
     }
 
     [Fact]
-    public void Failure_result_with_string_details_has_expected_member_values()
+    public void Failure_Result_with_string_details_has_expected_member_values()
     {
         var result = Result.Failure(_someFailureDetail.Description);
 
