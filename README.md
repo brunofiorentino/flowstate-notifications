@@ -129,7 +129,7 @@ Result<double> OperationC(string param)
 }
 ```
 
-### Result and Result<T> structs support deconstruction
+### Result and Result\<T\> structs support deconstruction
 ``` 
 Result<decimal> OperationD(string param)
 {
