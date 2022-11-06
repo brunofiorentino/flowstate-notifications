@@ -135,6 +135,7 @@ Result<decimal> OperationD(string param)
 {
     var (succeeded, importantCalculation, _) = OperationC(param); // ignoring (_) failure details.
     if (!succeeded) return Result<decimal>.Failure("Abstract reason");
+
     var derivedCalculation = importantCalculation * 2;
     return Result<decimal>.Success(derivedCalculation);
 }
