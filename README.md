@@ -69,19 +69,6 @@ Result Operation5(string param)
 }
 ```
 
-### Simple early return based validation, specifying two failure details with tags
-``` 
-Result Operation5(string param)
-{
-    if (param.StartsWith("x") && param.EndsWith("z"))
-        return Result.Failure(
-            new FailureDetail("'param' shouldn't ... x ", "tag1"), // Without convenience implicit cast
-            new FailureDetail("'param' shouldn't ... z", "tag2"));
-
-    return Result.Success();
-}
-```
-
 ### Acumulating failure details created in multiple ways
 ``` 
 Result Operation6(string param1, string param2, string param3)
