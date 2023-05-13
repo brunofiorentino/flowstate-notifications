@@ -3,7 +3,7 @@
 public class WhenComparingFailureDetails
 {
     [Fact]
-    public void Generates_value_object_hash_codes()
+    public void GeneratesValueObjectHashCodes()
     {
         var a1Tuple = ("ad", "at");
         var a1 = new FailureDetail(a1Tuple.Item1, a1Tuple.Item2);
@@ -28,7 +28,7 @@ public class WhenComparingFailureDetails
     }
 
     [Fact]
-    public void Compares_value_object_equality_for_all_members()
+    public void ComparesValueObjectEqualityForAllMembers()
     {
         var a = new FailureDetail("ad", "at");
         var b = new FailureDetail("bd", "bt");
@@ -38,7 +38,7 @@ public class WhenComparingFailureDetails
     }
 
     [Fact]
-    public void Compares_value_object_equality_considering_unset_tags_member()
+    public void ComparesValueObjectEqualityConsideringUnsetTagsMember()
     {
         var a = new FailureDetail("ad");
         var b = new FailureDetail("bd");
@@ -48,7 +48,7 @@ public class WhenComparingFailureDetails
     }
 
     [Fact]
-    public void Compares_value_object_equality_for_uninitialized_structs()
+    public void ComparesValueObjectEqualityForUninitializedStructs()
     {
         // Depends on IEquatable implementation otherwise boxing will break uninitilized/default comparisons
 

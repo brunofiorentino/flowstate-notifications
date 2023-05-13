@@ -2,11 +2,11 @@
 
 public class WhenCreatingFailureDetails
 {
-    private readonly string Description = "Some Error";
-    private readonly string Tag = "Some_Tag";
+    private static readonly string Description = "Some Error";
+    private static readonly string Tag = "Some_Tag";
 
     [Fact]
-    public void Uninitilized_struct_has_expected_member_values()
+    public void UninitializedStructHasExpectedMemberValues()
     {
         FailureDetail failureDetail = default;
         Assert.Null(failureDetail.Description);
@@ -15,7 +15,7 @@ public class WhenCreatingFailureDetails
     }
 
     [Fact]
-    public void FailureDetail_with_tags_unset_has_expected_member_values()
+    public void FailureDetailWithTagsUnsetHasExpectedMemberValues()
     {
         var failureDetail = new FailureDetail(Description);
         Assert.Equal(Description, failureDetail.Description);
@@ -23,25 +23,25 @@ public class WhenCreatingFailureDetails
     }
 
     [Fact]
-    public void FailureDetail_with_tags_unset_explicitly_has_expected_member_values()
+    public void FailureDetailWithTagsUnsetExplicitlyHasExpectedMemberValues()
     {
         var failureDetail = new FailureDetail(Description, null!);
         Assert.Empty(failureDetail.Tags);
     }
 
     [Fact]
-    public void Cannot_create_FailureDetail_with_null_description() =>
+    public void CannotCreateFailureDetailWithNullDescription() =>
         Assert.Throws<ArgumentNullException>(() => new FailureDetail(null!));
 
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    public void Cannot_create_FailureDetail_with_empty_or_white_space_description(string nullOrEmptyDescription) =>
+    public void CannotCreateFailureDetailWithEmptyOrWhiteSpaceDescription(string nullOrEmptyDescription) =>
         Assert.Throws<ArgumentException>(() => new FailureDetail(nullOrEmptyDescription));
 
 
     [Fact]
-    public void FailureDetail_with_description_and_tags_set_has_expected_member_values()
+    public void FailureDetailWithDescriptionAndTagsSetHasExpectedMemberValues()
     {
         var failureDetail = new FailureDetail(Description, Tag);
         Assert.Equal(Description, failureDetail.Description);

@@ -6,11 +6,11 @@ public class WhenCreatingValuedResults
     private readonly int? _someValue = 123;
 
     [Fact]
-    public void EmptyFailureDetails_internal_instance_is_same_as_platform_Array_Empty() =>
+    public void EmptyFailureDetailsInternalInstanceIsSameAsPlatformArrayEmpty() =>
         Assert.Same(Result<int?>.EmptyFailureDetails, Array.Empty<FailureDetail>());
 
     [Fact]
-    public void Uninitilized_struct_has_expected_member_values()
+    public void UninitializedStructHasExpectedMemberValues()
     {
         Result<int?> result = default;
 
@@ -20,7 +20,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Success_Result_has_expected_member_values()
+    public void SuccessResultHasExpectedMemberValues()
     {
         var result = Result<int?>.Success(_someValue);
 
@@ -30,7 +30,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Deconstruction_maps_expected_variables()
+    public void DeconstructionMapsExpectedVariables()
     {
         var result = Result<int?>.Success(_someValue);
         var (succeeded, value, failureDetails) = result;
@@ -41,7 +41,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Failure_Result_without_details_has_expected_member_values()
+    public void FailureResultWithoutDetailsHasExpectedMemberValues()
     {
         var result = Result<int?>.Failure();
 
@@ -51,7 +51,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Failure_Result_with_details_has_expected_member_values()
+    public void FailureResultWithDetailsHasExpectedMemberValues()
     {
         var result = Result<int?>.Failure(new[] { _someFailureDetail });
 
@@ -64,7 +64,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Failure_Result_with_details_initialized_via_string_params_array_has_expected_member_values()
+    public void FailureResultWithDetailsInitializedViaStringParamsArrayHasExpectedMemberValues()
     {
         const string error1 = "err1";
         const string error2 = "err2";
@@ -79,7 +79,7 @@ public class WhenCreatingValuedResults
     }
 
     [Fact]
-    public void Failure_Result_with_string_details_has_expected_member_values()
+    public void FailureResultWithStringDetailsHasExpectedMemberValues()
     {
         var result = Result<int?>.Failure(_someFailureDetail.Description);
 
@@ -92,7 +92,7 @@ public class WhenCreatingValuedResults
 
 
     [Fact]
-    public void Failure_Result_with_uninitialized_details_throws()
+    public void FailureResultWithUninitializedDetailsThrows()
     {
         var exception = Assert.Throws<ArgumentException>(() => Result<int?>.Failure(new FailureDetail[] { default }));
         Assert.Contains(ResultsErrorMessages.DetailsContainsUninitializedItems, exception.ToString());

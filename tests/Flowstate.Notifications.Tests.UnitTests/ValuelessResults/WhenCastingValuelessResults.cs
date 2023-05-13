@@ -3,21 +3,21 @@ namespace Flowstate.Notifications.Tests.UnitTests.ValuelessResults;
 public class WhenCastingValuelessResults
 {
     [Fact]
-    public void Success_Result_to_boolean_implicit_cast_produces_expected_value()
+    public void SuccessResultToBooleanImplicitCastProducesExpectedValue()
     {
         var result = Result.Success();
         Assert.True(result);
     }
 
     [Fact]
-    public void Failure_Result_to_boolean_implicit_cast_produces_expected_value()
+    public void FailureResultToBooleanImplicitCastProducesExpectedValue()
     {
         var result = Result.Failure();
         Assert.False(result);
     }
 
     [Fact]
-    public void Failure_Result_to_valued_cast_produces_expected_value()
+    public void FailureResultToValuedCastProducesExpectedValue()
     {
         var originalResult = Result.Failure("err1", "err2");
         var newResult = originalResult.Cast<long?>();
@@ -31,7 +31,7 @@ public class WhenCastingValuelessResults
     }
 
     [Fact]
-    public void Trying_to_force_success_Result_to_failure_Result_cast_throws()
+    public void TryingToForceSuccessResultToFailureResultCastThrows()
     {
         var originalResult = Result.Success();
         var exception = Assert.Throws<Exception>(() => originalResult.Cast<long?>());

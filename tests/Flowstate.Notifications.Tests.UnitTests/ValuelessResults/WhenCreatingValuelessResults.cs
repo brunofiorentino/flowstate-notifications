@@ -5,11 +5,11 @@ public class WhenCreatingValuelessResults
     private readonly FailureDetail _someFailureDetail = new("An Error");
 
     [Fact]
-    public void EmptyFailureDetails_internal_instance_is_same_as_platform_Array_Empty() =>
+    public void EmptyFailureDetailsInternalInstanceIsSameAsPlatformArrayEmpty() =>
         Assert.Same(Array.Empty<FailureDetail>(), Result.EmptyFailureDetails);
 
     [Fact]
-    public void Uninitilized_struct_has_expected_member_values()
+    public void UninitializedStructHasExpectedMemberValues()
     {
         Result result = default;
 
@@ -18,7 +18,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Success_Result_has_expected_member_values()
+    public void SuccessResultHasExpectedMemberValues()
     {
         var result = Result.Success();
 
@@ -27,7 +27,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Deconstruction_maps_expected_variables()
+    public void DeconstructionMapsExpectedVariables()
     {
         var result = Result.Success();
         var (succeeded, failureDetails) = result;
@@ -37,7 +37,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_Result_with_details_has_expected_member_values()
+    public void FailureResultWithDetailsHasExpectedMemberValues()
     {
         var result = Result.Failure(new[] { _someFailureDetail });
 
@@ -49,7 +49,7 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_Result_with_details_initialized_via_string_params_array_has_expected_member_values()
+    public void FailureResultWithDetailsInitializedViaStringParamsArrayHasExpectedMemberValues()
     {
         const string error1 = "err1";
         const string error2 = "err2";
@@ -63,14 +63,14 @@ public class WhenCreatingValuelessResults
     }
 
     [Fact]
-    public void Failure_Result_with_uninitialized_details_throws()
+    public void FailureResultWithUninitializedDetailsThrows()
     {
         var exception = Assert.Throws<ArgumentException>(() => Result.Failure(new FailureDetail[] { default }));
         Assert.Contains(ResultsErrorMessages.DetailsContainsUninitializedItems, exception.ToString());
     }
 
     [Fact]
-    public void Failure_Result_with_string_details_has_expected_member_values()
+    public void FailureResultWithStringDetailsHasExpectedMemberValues()
     {
         var result = Result.Failure(_someFailureDetail.Description);
 
