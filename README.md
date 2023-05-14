@@ -1,6 +1,6 @@
 # Flowstate.Notifications
 
-Flowstate.Notififications is a minimal C# Notification library based on structs (reduced heap allocations) and a simple API: a few factory methods for success and failure results, in the latter case relying on implicit casts to expressively specify failure details.
+Flowstate.Notifications is a minimal C# Notification library based on structs (reduced heap allocations) and a simple API: a few factory methods for success and failure results, in the latter case relying on implicit casts to expressively specify failure details.
 
 "Notification" refers to the [homonymous design pattern](https://martinfowler.com/eaaDev/Notification.html), used to avoid runtime costly exceptions throwing for mere input and business rule validation. However, this is not a substitute for structured error handling, as exceptions should continue to be used for guard clauses and the like.
 
