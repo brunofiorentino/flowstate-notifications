@@ -2,7 +2,7 @@
 
 Flowstate.Notifications is a minimal C# Notification library based on structs (reduced heap allocations) and a simple API: a few factory methods for success and failure results, in the latter case relying on implicit casts to expressively specify failure details.
 
-"Notifications" refers to the [homonymous design pattern](https://martinfowler.com/eaaDev/Notification.html), used to avoid exceptions for control flow/mere input and business rule validation as stacktraces can be costly and it can be harders to reason. However, this is not a substitute for structured error handling, as exceptions should continue to be used for cases like missing/mismatching dependencies or plain api misusage. [Here's another related/interesting article](https://shipilev.net/blog/2014/exceptional-performance/) where the author suggests that 1 in 10K would be "exceptional enough".
+"Notifications" refers to the [homonymous design pattern](https://martinfowler.com/eaaDev/Notification.html), used to avoid exceptions for control flow and mere input and business rule validation as stacktraces can be costly and it can be harder to reason. However, this is not a substitute for structured error handling, as exceptions should still to be used for cases like missing/mismatching dependencies or plain api misusage -- mostly cases that we should deal with during development/testing. [Here's another related article](https://shipilev.net/blog/2014/exceptional-performance/) where the author suggests that 1 in 10K would be exceptional enough to justify an exception.
 
 ## Usage
 
